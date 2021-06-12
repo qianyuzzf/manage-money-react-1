@@ -10,7 +10,7 @@ const NavWrapper = styled.nav`
     display: flex;
 
     > li {
-      width: 33.3333%;
+      width: 20%;
       text-align: center;
       display: flex;
       padding: 4px 0;
@@ -31,12 +31,20 @@ function Nav() {
     <NavWrapper>
       <ul>
         <li>
-          <Icon name="money"/>
-          <Link to="/money">记账</Link>
+          <Icon name="home"/>
+          <Link to="/home">首页</Link>
+        </li>
+        <li>
+          <Icon name="detail"/>
+          <Link to="/detail">明细</Link>
+        </li>
+        <li>
+          <Icon name="tally"/>
+          <Link to="/tally">记账</Link>
         </li>
         <li>
           <Icon name="label"/>
-          <Link to="/tags">标签</Link>
+          <Link to="/label">标签</Link>
         </li>
         <li>
           <Icon name="statistics"/>
