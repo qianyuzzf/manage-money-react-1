@@ -28,21 +28,26 @@ const TypeSections = styled.section`
   }
 `;
 
-function Types() {
+type Props = {
+  value: string;
+  onChange: (value: ('-' | '+')) => void
+}
+
+function Types(props: Props) {
   const hashMap = {
     '-': '支出',
     '+': '收入'
   };
   type TypeList = keyof typeof hashMap;
   const [typeList] = useState<TypeList[]>(['-', '+']);
-  const [type, setType] = useState('-');
+  const type = props.value;
   return (
     <TypeSections>
       <ul>
         {typeList.map(item => {
           return (
             <li key={item} className={type === item ? 'selected' : ''}
-                onClick={() => setType(item)}>
+                onClick={() => props.onChange(item)}>
               {hashMap[item]}
             </li>
           );

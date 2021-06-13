@@ -1,13 +1,21 @@
 import React, {useState} from 'react';
 import {NumberPadSection} from './numberPad/NumberPadSection';
 
-function NumberPad() {
-  const [output, _setOutput] = useState('0');
-  const setOutput = (x: string) => {
-    if (output.length >= 16) {
-      return;
+type Props = {
+  value: number;
+  onChange: (value: number) => void;
+  onOk?: () => void
+}
+
+function NumberPad(props: Props) {
+  const [output, _setOutput] = useState(props.value.toString());
+  const setOutput = (newOutput: string) => {
+    if (newOutput.length > 16) {
+      _setOutput(newOutput.slice(0, 16));
+    } else {
+      _setOutput(newOutput);
+      props.onChange(parseFloat(newOutput));
     }
-    _setOutput(x);
   };
   const onButton = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
@@ -49,7 +57,9 @@ function NumberPad() {
         setOutput('0');
         break;
       case 'OK':
-        //TODO
+        if (props.onOk) {
+          props.onOk();
+        }
         break;
     }
   };
