@@ -368,8 +368,20 @@ module.exports = function (webpackEnv) {
             {
               test: /\.svg$/,
               use: [
-                {loader: 'svg-sprite-loader', options: {}},
-                {loader: 'svgo-loader', options: {}}
+                //extract: false 不解析出文件
+                {loader: 'svg-sprite-loader', options: {extract: false}},
+                {
+                  loader: 'svgo-loader', options: {
+                    plugins: [
+                      {
+                        name: 'removeAttrs',
+                        params: {
+                          attrs: 'fill'
+                        }
+                      }
+                    ]
+                  }
+                }
               ]
             },
             // TODO: Merge this config once `image/avif` is in the mime-db

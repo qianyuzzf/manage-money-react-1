@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 import Icon from './Icon';
 
@@ -11,16 +11,24 @@ const NavWrapper = styled.nav`
 
     > li {
       width: 20%;
-      text-align: center;
-      display: flex;
-      padding: 4px 0;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
 
-      .icon {
-        width: 24px;
-        height: 24px;
+      > a {
+        margin: 0 10%;
+        padding: 4px 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &.selected {
+          color: red;
+        }
+
+        .icon {
+          width: 24px;
+          height: 24px;
+        }
       }
     }
   }
@@ -31,24 +39,34 @@ function Nav() {
     <NavWrapper>
       <ul>
         <li>
-          <Icon name="home"/>
-          <Link to="/home">首页</Link>
+          <NavLink to="/home" activeClassName="selected">
+            <Icon name="home"/>
+            首页
+          </NavLink>
         </li>
         <li>
-          <Icon name="detail"/>
-          <Link to="/detail">明细</Link>
+          <NavLink to="/detail" activeClassName="selected">
+            <Icon name="detail"/>
+            明细
+          </NavLink>
         </li>
         <li>
-          <Icon name="tally"/>
-          <Link to="/tally">记账</Link>
+          <NavLink to="/tally" activeClassName="selected">
+            <Icon name="tally"/>
+            记账
+          </NavLink>
         </li>
         <li>
-          <Icon name="label"/>
-          <Link to="/label">标签</Link>
+          <NavLink to="/label" activeClassName="selected">
+            <Icon name="label"/>
+            标签
+          </NavLink>
         </li>
         <li>
-          <Icon name="statistics"/>
-          <Link to="/statistics">统计</Link>
+          <NavLink to="/statistics" activeClassName="selected">
+            <Icon name="statistics"/>
+            统计
+          </NavLink>
         </li>
       </ul>
     </NavWrapper>
