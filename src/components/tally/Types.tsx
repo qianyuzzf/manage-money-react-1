@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {useState} from 'react';
 
 const TypeSections = styled.section`
   font-size: 24px;
@@ -28,11 +29,24 @@ const TypeSections = styled.section`
 `;
 
 function Types() {
+  const hashMap = {
+    '-': '支出',
+    '+': '收入'
+  };
+  type TypeList = keyof typeof hashMap;
+  const [typeList] = useState<TypeList[]>(['-', '+']);
+  const [type, setType] = useState('-');
   return (
     <TypeSections>
       <ul>
-        <li className="selected">支出</li>
-        <li>收入</li>
+        {typeList.map(item => {
+          return (
+            <li className={type === item ? 'selected' : ''}
+                onClick={() => setType(item)}>
+              {hashMap[item]}
+            </li>
+          );
+        })}
       </ul>
     </TypeSections>
   );
