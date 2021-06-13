@@ -41,7 +41,7 @@ function Types() {
       <ul>
         {typeList.map(item => {
           return (
-            <li className={type === item ? 'selected' : ''}
+            <li key={item} className={type === item ? 'selected' : ''}
                 onClick={() => setType(item)}>
               {hashMap[item]}
             </li>

@@ -28,7 +28,6 @@ const NoteSections = styled.section`
 function Notes() {
   const [note, setNote] = useState('');
   const refInput = useRef<HTMLInputElement>(null);
-  console.log(note);
   const onBlur = () => {
     if (refInput.current) {
       setNote(refInput.current.value);
