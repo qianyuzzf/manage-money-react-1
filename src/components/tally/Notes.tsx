@@ -8,6 +8,10 @@ const NoteSections = styled.section`
   font-size: 14px;
 `;
 
+const MyInput = styled(Input)`
+  height: 72px;
+`;
+
 type Props = {
   value: string;
   onChange: (value: string) => void
@@ -20,8 +24,8 @@ function Notes(props: Props) {
   };
   return (
     <NoteSections>
-      <Input inputName="备注" type="text" placeholder="在这里添加备注"
-             value={note} onChange={onChange}/>
+      <MyInput inputName="备注" type="text" placeholder="在这里添加备注"
+               value={note} onChange={onChange}/>
     </NoteSections>
   );
 }

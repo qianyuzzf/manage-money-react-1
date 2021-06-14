@@ -13,7 +13,6 @@ const Label = styled.label`
   > input {
     display: block;
     width: 100%;
-    height: 72px;
     background: none;
     border: none;
   }
@@ -24,11 +23,11 @@ type Props = {
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 function Input(props: Props) {
-  const {inputName, children, ...rest} = props;
+  const {inputName, children, className, ...rest} = props;
   return (
     <Label>
       <span>{inputName}</span>
-      <input {...rest}/>
+      <input {...rest} className={className}/>
     </Label>
   );
 }
