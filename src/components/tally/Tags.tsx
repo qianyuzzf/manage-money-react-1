@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import {useTags} from '../../lib/useTags';
+import {createId} from '../../lib/createId';
+import {TagsType} from '../../types/TagsType';
 
 const TagSections = styled.section`
   flex-grow: 1;
@@ -38,14 +40,14 @@ const TagSections = styled.section`
   }
 `;
 type Props = {
-  value: string[];
-  onChange: (value: string[]) => void
+  value: TagsType[];
+  onChange: (value: TagsType[]) => void
 }
 
 function Tags(props: Props) {
   const {tags, setTags} = useTags();
   const selectedTags = props.value;
-  const toggle = (tag: string) => {
+  const toggle = (tag: TagsType) => {
     if (selectedTags.indexOf(tag) >= 0) {
       props.onChange(selectedTags.filter(t => t !== tag));
     } else {
@@ -56,7 +58,7 @@ function Tags(props: Props) {
     const tag = window.prompt('请问新添加的标签名是什么');
     if (tag !== null) {
       if (tag) {
-        setTags([...tags, tag]);
+        setTags([...tags, {id: createId(), name: tag}]);
         window.alert('标签名添加成功');
       } else {
         window.alert('标签名不能为空');
@@ -68,10 +70,10 @@ function Tags(props: Props) {
       <ol>
         {tags.map(tag => {
           return (
-            <li key={tag}
-                className={selectedTags.indexOf(tag) >= 0 ? 'selected' : ''}
+            <li key={tag.id}
+                className={selectedTags.map(item => item.id).indexOf(tag.id) >= 0 ? 'selected' : ''}
                 onClick={() => toggle(tag)}>
-              {tag}
+              {tag.name}
             </li>
           );
         })}

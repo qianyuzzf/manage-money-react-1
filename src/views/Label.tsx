@@ -40,14 +40,14 @@ const Space = styled.div`
 `;
 
 function Label() {
-  const {tags, setTags} = useTags();
+  const {tags} = useTags();
   return (
     <Layout>
       <TagList>
         {tags.map(item => (
-          <li key={item}>
-            <Link to={'/label/' + item}>
-              <span className="oneLine">{item}</span>
+          <li key={item.id}>
+            <Link to={'/label/' + item.id}>
+              <span className="oneLine">{item.id}|{item.name}</span>
               <Icon name="right"/>
             </Link>
           </li>

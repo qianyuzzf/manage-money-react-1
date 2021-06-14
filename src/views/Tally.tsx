@@ -5,6 +5,7 @@ import {Notes} from '../components/tally/Notes';
 import {Types} from '../components/tally/Types';
 import {NumberPad} from '../components/tally/NumberPad';
 import {useState} from 'react';
+import {TagsType} from '../types/TagsType';
 
 const MyLayout = styled(Layout)`
   display: flex;
@@ -13,7 +14,7 @@ const MyLayout = styled(Layout)`
 
 function Tally() {
   const [selected, setSelected] = useState({
-    tags: [] as string[],
+    tags: [] as TagsType[],
     notes: '',
     type: '-' as ('-' | '+'),
     amount: 0
