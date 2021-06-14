@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {useState} from 'react';
+import {useTags} from '../../lib/useTags';
 
 const TagSections = styled.section`
   flex-grow: 1;
@@ -43,7 +43,7 @@ type Props = {
 }
 
 function Tags(props: Props) {
-  const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
+  const {tags, setTags} = useTags();
   const selectedTags = props.value;
   const toggle = (tag: string) => {
     if (selectedTags.indexOf(tag) >= 0) {
