@@ -7,6 +7,7 @@ import Home from './views/Home';
 import Tally from './views/Tally';
 import Detail from './views/Detail';
 import styled from 'styled-components';
+import {Tag} from './views/Tag';
 
 const AppWrapper = styled.div`
   color: #333;
@@ -18,19 +19,22 @@ function App() {
       <Router>
         <Switch>
           <Redirect exact from="/" to="/home"/>
-          <Route path="/home">
+          <Route exact path="/home">
             <Home/>
           </Route>
-          <Route path="/detail">
+          <Route exact path="/detail">
             <Detail/>
           </Route>
-          <Route path="/tally">
+          <Route exact path="/tally">
             <Tally/>
           </Route>
-          <Route path="/label">
+          <Route exact path="/label">
             <Label/>
           </Route>
-          <Route path="/statistics">
+          <Route exact path="/label/:id">
+            <Tag/>
+          </Route>
+          <Route exact path="/statistics">
             <Statistics/>
           </Route>
           <Route path="*">
