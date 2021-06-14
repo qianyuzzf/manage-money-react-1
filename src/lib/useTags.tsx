@@ -11,7 +11,8 @@ const defTags = [
 
 function useTags() {
   const [tags, setTags] = useState<TagsType[]>(defTags);
-  return {tags, setTags};
+  const findTag = (id: number) => tags.filter(item => item.id === id)[0];
+  return {tags, setTags, findTag};
 }
 
 export {useTags};
