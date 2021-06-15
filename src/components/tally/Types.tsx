@@ -6,7 +6,14 @@ const TypeSections = styled.section`
 
   > ul {
     display: flex;
-    background: #c4c4c4;
+
+    &.type-wrapper1 {
+      background: #c4c4c4;
+    }
+
+    &.type-wrapper2 {
+      background: #fff;
+    }
 
     > li {
       width: 50%;
@@ -30,7 +37,8 @@ const TypeSections = styled.section`
 
 type Props = {
   value: string;
-  onChange: (value: ('-' | '+')) => void
+  onChange: (value: ('-' | '+')) => void;
+  className?: string
 }
 
 function Types(props: Props) {
@@ -43,10 +51,11 @@ function Types(props: Props) {
   const type = props.value;
   return (
     <TypeSections>
-      <ul>
+      <ul className={props.className}>
         {typeList.map(item => {
           return (
-            <li key={item} className={type === item ? 'selected' : ''}
+            <li key={item}
+                className={type === item ? 'selected' : ''}
                 onClick={() => props.onChange(item)}>
               {hashMap[item]}
             </li>

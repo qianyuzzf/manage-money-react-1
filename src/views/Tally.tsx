@@ -42,7 +42,7 @@ function Tally() {
             onChange={(value) => onChange({tags: value})}/>
       <Notes value={newRecord.notes}
              onChange={(value) => onChange({notes: value})}/>
-      <Types value={newRecord.type}
+      <Types value={newRecord.type} className="type-wrapper1"
              onChange={(value) => onChange({type: value})}/>
       <NumberPad value={newRecord.amount}
                  onChange={(value) => onChange({amount: value})}
