@@ -36,6 +36,7 @@ function Tag() {
   const [defaultName, setDefaultName] = useState('');
   useEffect(() => {
     setDefaultName(model().cloneValue(tag.name));
+    // eslint-disable-next-line
   }, []);
   return (
     <Layout>

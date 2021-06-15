@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {createId} from './createId';
 import {TagsType} from '../types/TagsType';
-import {model} from './model';
 
 const defTags = [
   {id: createId(), name: '衣'},
@@ -22,20 +21,10 @@ function useTags() {
     return undefined;
   };
   const updateTag = (id: number, name: string) => {
-    const index = findTagIndex(id);
-    if (index) {
-      const tagsClone: TagsType[] = model().cloneValue(tags);
-      tagsClone.splice(index, 1, {id: index, name});
-      setTags(tagsClone);
-    }
+    setTags(tags.map(item => item.id === id ? {id, name} : item));
   };
   const deleteTag = (id: number) => {
-    const index = findTagIndex(id);
-    if (index) {
-      const tagsClone: TagsType[] = model().cloneValue(tags);
-      tagsClone.splice(index, 1);
-      setTags(tagsClone);
-    }
+    setTags(tags.filter(item => item.id !== id));
   };
   return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag};
 }
