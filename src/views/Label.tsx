@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import {useTags} from '../lib/useTags';
+import {useTags} from '../hooks/useTags';
 import styled from 'styled-components';
 import Icon from '../components/Icon';
 import {Link} from 'react-router-dom';
@@ -26,14 +26,14 @@ const TagList = styled.ol`
 `;
 
 function Label() {
-  const {tags} = useTags();
+  const {tags, addTag} = useTags();
   return (
     <Layout>
       <TagList>
         {tags.map(item => (
           <li key={item.id}>
             <Link to={'/label/' + item.id}>
-              <span className="oneLine">{item.id}|{item.name}</span>
+              <span className="oneLine">{item.name}</span>
               <Icon name="right"/>
             </Link>
           </li>
@@ -41,7 +41,7 @@ function Label() {
       </TagList>
       <Center>
         <Space/>
-        <Button>新增标签</Button>
+        <Button onClick={addTag}>新增标签</Button>
       </Center>
     </Layout>
   );

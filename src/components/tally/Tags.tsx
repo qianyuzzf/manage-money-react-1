@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import {useTags} from '../../lib/useTags';
-import {createId} from '../../lib/createId';
+import {useTags} from '../../hooks/useTags';
 import {TagsType} from '../../types/TagsType';
 
 const TagSections = styled.section`
@@ -45,24 +44,13 @@ type Props = {
 }
 
 function Tags(props: Props) {
-  const {tags, setTags} = useTags();
+  const {tags, addTag} = useTags();
   const selectedTags = props.value;
   const toggle = (tag: TagsType) => {
     if (selectedTags.indexOf(tag) >= 0) {
       props.onChange(selectedTags.filter(t => t !== tag));
     } else {
       props.onChange([...selectedTags, tag]);
-    }
-  };
-  const addTag = () => {
-    const tag = window.prompt('请问新添加的标签名是什么');
-    if (tag !== null) {
-      if (tag) {
-        setTags([...tags, {id: createId(), name: tag}]);
-        window.alert('标签名添加成功');
-      } else {
-        window.alert('标签名不能为空');
-      }
     }
   };
   return (
