@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {useTags} from '../../hooks/useTags';
-import {TagsType} from '../../types/TagsType';
+import {TagsType} from '../../types/Types';
 
 const TagSections = styled.section`
   flex-grow: 1;

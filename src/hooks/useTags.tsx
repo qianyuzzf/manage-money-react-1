@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {createId} from '../lib/createId';
-import {TagsType} from '../types/TagsType';
+import {TagsType} from '../types/Types';
 import {useUpdate} from './useUpdate';
 
 const defTags = () => [

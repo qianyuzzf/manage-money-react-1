@@ -5,38 +5,48 @@ import {Notes} from '../components/tally/Notes';
 import {Types} from '../components/tally/Types';
 import {NumberPad} from '../components/tally/NumberPad';
 import {useState} from 'react';
-import {TagsType} from '../types/TagsType';
+import {RecordItems} from '../types/Types';
+import {useRecordItems} from '../hooks/useRecordItems';
 
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `;
 
+const initRecord: RecordItems = {
+  tags: [],
+  notes: '',
+  type: '-',
+  amount: 0
+};
+
 function Tally() {
-  const [selected, setSelected] = useState({
-    tags: [] as TagsType[],
-    notes: '',
-    type: '-' as ('-' | '+'),
-    amount: 0
-  });
-  const onChange = (object: Partial<typeof selected>) => {
-    setSelected({
-      ...selected,
+  const {addRecord} = useRecordItems();
+  const [newRecord, setNewRecord] = useState(initRecord);
+  const onChange = (object: Partial<typeof newRecord>) => {
+    setNewRecord({
+      ...newRecord,
       ...object
     });
   };
+  const submit = () => {
+    const submitResult = addRecord(newRecord);
+    if (submitResult) {
+      setNewRecord(initRecord);
+    }
+  };
   return (
     <MyLayout>
-      <Tags value={selected.tags}
+      {JSON.stringify(newRecord)}
+      <Tags value={newRecord.tags}
             onChange={(value) => onChange({tags: value})}/>
-      <Notes value={selected.notes}
+      <Notes value={newRecord.notes}
              onChange={(value) => onChange({notes: value})}/>
-      <Types value={selected.type}
+      <Types value={newRecord.type}
              onChange={(value) => onChange({type: value})}/>
-      <NumberPad value={selected.amount}
+      <NumberPad value={newRecord.amount}
                  onChange={(value) => onChange({amount: value})}
-                 onOk={() => {
-                 }}/>
+                 onOk={submit}/>
     </MyLayout>
   );
 }
