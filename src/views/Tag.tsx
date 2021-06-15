@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import {useTags} from '../lib/useTags';
 import Layout from '../components/Layout';
 import Icon from '../components/Icon';
@@ -38,10 +38,14 @@ function Tag() {
     setDefaultName(model().cloneValue(tag.name));
     // eslint-disable-next-line
   }, []);
+  const history = useHistory();
+  const routeBack = () => {
+    history.goBack();
+  };
   return (
     <Layout>
       <NavBar>
-        <Icon name="left"/>
+        <Icon name="left" onClick={routeBack}/>
         <span>编辑标签</span>
         <Icon/>
       </NavBar>

@@ -25,6 +25,7 @@
     "bfj": "^7.0.2",
     "camelcase": "^6.1.0",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "classnames": "^2.3.1",
     "css-loader": "4.3.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -161,6 +162,7 @@
     ]
   },
   "devDependencies": {
+    "@types/classnames": "^2.3.1",
     "@types/webpack-env": "^1.16.0",
     "svg-sprite-loader": "^6.0.7",
     "svgo-loader": "^3.0.0"
