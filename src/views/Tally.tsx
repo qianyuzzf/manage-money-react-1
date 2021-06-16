@@ -37,13 +37,12 @@ function Tally() {
   };
   return (
     <MyLayout>
-      {JSON.stringify(newRecord)}
+      <Types value={newRecord.type} className="type-wrapper1"
+             onChange={(value) => onChange({type: value})}/>
       <Tags value={newRecord.tags}
             onChange={(value) => onChange({tags: value})}/>
       <Notes value={newRecord.notes}
              onChange={(value) => onChange({notes: value})}/>
-      <Types value={newRecord.type} className="type-wrapper1"
-             onChange={(value) => onChange({type: value})}/>
       <NumberPad value={newRecord.amount}
                  onChange={(value) => onChange({amount: value})}
                  onOk={submit}/>

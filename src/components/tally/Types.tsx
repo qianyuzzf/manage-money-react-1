@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import {useState} from 'react';
 
 const TypeSections = styled.section`
-  font-size: 24px;
+  font-size: 18px;
 
   > ul {
     display: flex;
 
     &.type-wrapper1 {
-      background: #c4c4c4;
+      background: rgba(255, 218, 69, 1);
     }
 
     &.type-wrapper2 {
@@ -16,15 +16,15 @@ const TypeSections = styled.section`
     }
 
     > li {
-      width: 50%;
+      width: 16.6667%;
       text-align: center;
-      padding: 16px 0;
+      padding: 12px 0;
       position: relative;
 
       &.selected::after {
         content: '';
         display: block;
-        height: 3px;
+        height: 2px;
         background: #333;
         position: absolute;
         bottom: 0;
@@ -52,6 +52,8 @@ function Types(props: Props) {
   return (
     <TypeSections>
       <ul className={props.className}>
+        <li/>
+        <li/>
         {typeList.map(item => {
           return (
             <li key={item}
@@ -61,6 +63,8 @@ function Types(props: Props) {
             </li>
           );
         })}
+        <li/>
+        <li/>
       </ul>
     </TypeSections>
   );
