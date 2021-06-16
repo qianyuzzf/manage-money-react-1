@@ -40,7 +40,7 @@ function Label() {
         ))}
       </TagList>
       <Center>
-        <Space/>
+        <Space height={48}/>
         <Button onClick={addTag}>新增标签</Button>
       </Center>
     </Layout>

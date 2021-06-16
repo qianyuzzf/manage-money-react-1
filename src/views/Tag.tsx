@@ -58,7 +58,7 @@ function Tag() {
                  onChange={(e) => updateTag(tag.id, e.target.value)}/>
       </InputWrapper>
       <Center>
-        <Space/>
+        <Space height={48}/>
         <Button onClick={() => {
           deleteTag(tag.id);
           window.history.back();

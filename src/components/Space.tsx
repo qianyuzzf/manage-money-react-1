@@ -1,6 +1,12 @@
-import styled from 'styled-components';
+type Props = {
+  height: number;
+  background?: string
+}
 
-const Space = styled.div`
-  height: 48px;
-`;
+function Space(props: Props) {
+  return (
+    <div style={{height: props.height, background: props.background}}/>
+  );
+}
+
 export {Space};
