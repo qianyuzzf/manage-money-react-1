@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 const importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
 try {
-  importAll(require.context('../icons', true, /\.svg$/));
+  importAll(require.context('../assets/icons', true, /\.svg$/));
 } catch (error) {
   console.log(error);
 }
