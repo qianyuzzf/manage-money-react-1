@@ -32,9 +32,7 @@ const MyInput = styled(Input)`
 function Tag() {
   const {findTag, updateTag, deleteTag} = useTags();
   const {id} = useParams<{ id: string }>();
-  console.log(id);
   const tag = findTag(parseInt(id));
-  console.log(tag);
   const [defaultName, setDefaultName] = useState('');
   useEffect(() => {
     setDefaultName(model().cloneValue(tag.name));

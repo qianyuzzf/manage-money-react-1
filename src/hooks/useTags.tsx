@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {createId} from '../lib/createId';
 import {TagsType} from '../types/Types';
 import {useUpdate} from './useUpdate';
@@ -11,12 +11,8 @@ const defTags = () => [
 ];
 
 function useTags() {
-  const [tags, setTags] = useState<TagsType[]>([]);
-  useEffect(() => {
-    const localTags: TagsType[] = JSON.parse(window.localStorage.getItem('tags') || '[]');
-    setTags(localTags.length === 0 ? defTags() : localTags);
-    // eslint-disable-next-line
-  }, []);
+  const localTags: TagsType[] = JSON.parse(window.localStorage.getItem('tags') || '[]');
+  const [tags, setTags] = useState<TagsType[]>(localTags.length === 0 ? defTags() : localTags);
   useUpdate(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags));
   }, [tags]);
