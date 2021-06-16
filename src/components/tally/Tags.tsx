@@ -1,41 +1,66 @@
 import styled from 'styled-components';
 import {useTags} from '../../hooks/useTags';
 import {TagsType} from '../../types/Types';
+import Icon from '../Icon';
 
 const TagSections = styled.section`
   flex-grow: 1;
-  background: #FFFFFF;
-  padding: 12px 16px;
+  background: #fff;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
 
   > ol {
-    margin: 0 -12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 
     > li {
-      background: #D9D9D9;
-      border-radius: 18px;
-      display: inline-block;
-      padding: 3px 18px;
+      width: 100%;
       font-size: 14px;
-      margin: 8px 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      > div {
+        width: 80%;
+        height: 0;
+        padding-bottom: 80%;
+        background: rgba(245, 245, 245, 1);
+        border-radius: 50%;
+        position: relative;
+
+        > svg {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 60%;
+          height: 60%;
+        }
+      }
+
+      > span {
+        margin-top: 6px;
+      }
 
       &.selected {
-        background: red;
-        color: white;
+        > div {
+          background: rgba(255, 218, 69, 1);
+        }
+      }
+
+      > button {
+        background: none;
+        border: none;
+        padding: 2px 4px;
+        border-bottom: 1px solid #333;
+        color: #666;
+        margin-top: 8px;
+        margin-right: auto;
       }
     }
-  }
-
-  > button {
-    background: none;
-    border: none;
-    padding: 2px 4px;
-    border-bottom: 1px solid #333;
-    color: #666;
-    margin-top: 8px;
   }
 `;
 type Props = {
@@ -61,12 +86,20 @@ function Tags(props: Props) {
             <li key={tag.id}
                 className={selectedTags.map(item => item.id).indexOf(tag.id) >= 0 ? 'selected' : ''}
                 onClick={() => toggle(tag)}>
-              {tag.name}
+              <div>
+                <Icon name="diet"/>
+              </div>
+              <span>{tag.name}</span>
             </li>
           );
         })}
+        <li onClick={addTag}>
+          <div>
+            <Icon name="custom"/>
+          </div>
+          <span>新增标签</span>
+        </li>
       </ol>
-      <button onClick={addTag}>新增标签</button>
     </TagSections>
   );
 }
