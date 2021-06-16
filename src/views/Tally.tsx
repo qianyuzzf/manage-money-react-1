@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Tags} from '../components/tally/Tags';
 import {Notes} from '../components/tally/Notes';
 import {Types} from '../components/tally/Types';
-import {NumberPad} from '../components/tally/NumberPad';
+import {InputMoney} from '../components/tally/InputMoney';
 import {useState} from 'react';
 import {RecordItems} from '../types/Types';
 import {useRecordItems} from '../hooks/useRecordItems';
@@ -46,9 +46,9 @@ function Tally() {
             onChange={(value) => onChange({tags: value})}/>
       <Notes value={{notes: newRecord.notes, time: newRecord.time}}
              onChange={(value) => onChange(value)}/>
-      <NumberPad value={newRecord.amount}
-                 onChange={(value) => onChange({amount: value})}
-                 onOk={submit}/>
+      <InputMoney value={newRecord.amount}
+                  onChange={(value) => onChange({amount: value})}
+                  onOk={submit}/>
     </MyLayout>
   );
 }
