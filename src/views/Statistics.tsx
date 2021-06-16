@@ -34,12 +34,12 @@ function Statistics() {
   const selectedType = recordItems.filter(item => item.type === type);
   const hash: { [key: string]: RecordItems[] } = {};
   selectedType.forEach(item => {
-    const key = dayjs(item.createAt).format('YYYY年MM月DD日');
+    const key = item.time;
     if (key) {
       if (!(key in hash)) {
         hash[key] = [];
       }
-      hash[key].push(item);
+      hash[key].unshift(item);
     }
   });
   const array = Object.entries(hash).sort((a, b) => {
@@ -47,12 +47,12 @@ function Statistics() {
   });
   const changeTime = (time: string) => {
     const today = dayjs();
-    if (today.format('YYYY年MM月DD日') === time) {
+    if (today.format('YYYY-MM-DD') === time) {
       return '今天';
-    } else if (today.subtract(1, 'day').format('YYYY年MM月DD日') === time) {
+    } else if (today.subtract(1, 'day').format('YYYY-MM-DD') === time) {
       return '昨天';
     } else {
-      return time;
+      return time.replace('-', '年').replace('-', '月') + '日';
     }
   };
   return (

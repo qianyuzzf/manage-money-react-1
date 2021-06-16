@@ -7,6 +7,7 @@ import {NumberPad} from '../components/tally/NumberPad';
 import {useState} from 'react';
 import {RecordItems} from '../types/Types';
 import {useRecordItems} from '../hooks/useRecordItems';
+import dayjs from 'dayjs';
 
 const MyLayout = styled(Layout)`
   display: flex;
@@ -17,7 +18,8 @@ const initRecord: RecordItems = {
   tags: [],
   notes: '',
   type: '-',
-  amount: 0
+  amount: 0,
+  time: dayjs().format('YYYY-MM-DD')
 };
 
 function Tally() {
@@ -37,12 +39,13 @@ function Tally() {
   };
   return (
     <MyLayout>
+      {JSON.stringify(newRecord)}
       <Types value={newRecord.type} className="type-wrapper1"
              onChange={(value) => onChange({type: value})}/>
       <Tags value={newRecord.tags}
             onChange={(value) => onChange({tags: value})}/>
-      <Notes value={newRecord.notes}
-             onChange={(value) => onChange({notes: value})}/>
+      <Notes value={{notes: newRecord.notes, time: newRecord.time}}
+             onChange={(value) => onChange(value)}/>
       <NumberPad value={newRecord.amount}
                  onChange={(value) => onChange({amount: value})}
                  onOk={submit}/>

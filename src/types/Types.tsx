@@ -4,7 +4,8 @@ type RecordItems = {
   tags: TagsType[]
   notes: string
   type: '-' | '+'
-  amount: number
+  amount: number,
+  time: string
   createAt?: string
 }
 

@@ -9,23 +9,30 @@ const NoteSections = styled.section`
 `;
 
 const MyInput = styled(Input)`
-  height: 72px;
+  height: 56px;
 `;
 
+type Value = { notes: string, time: string }
+
 type Props = {
-  value: string;
-  onChange: (value: string) => void
+  value: Value;
+  onChange: (value: Value) => void
 }
 
 function Notes(props: Props) {
-  const note = props.value;
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    props.onChange(e.target.value);
+  const propsData = JSON.parse(JSON.stringify(props.value));
+  const onChangeNotes: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    props.onChange({...propsData, notes: e.target.value});
+  };
+  const onChangeTime: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    props.onChange({...propsData, time: e.target.value});
   };
   return (
     <NoteSections>
+      <MyInput inputName="时间" type="date"
+               value={propsData.time} onChange={onChangeTime}/>
       <MyInput inputName="备注" type="text" placeholder="在这里添加备注"
-               value={note} onChange={onChange}/>
+               value={propsData.notes} onChange={onChangeNotes}/>
     </NoteSections>
   );
 }
