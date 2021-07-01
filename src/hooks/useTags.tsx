@@ -37,7 +37,10 @@ function useTags() {
     }
   };
   const deleteTag = (id: number) => {
-    setTags(tags.filter(item => item.id !== id));
+    const result = window.confirm('是否删除标签');
+    if (result) {
+      setTags(tags.filter(item => item.id !== id));
+    }
   };
   const updateTag = (id: number, name: string) => {
     setTags(tags.map(item => item.id === id ? {id, name} : item));
