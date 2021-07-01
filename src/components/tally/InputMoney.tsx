@@ -1,12 +1,27 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Input} from '../Input';
-import {Space} from '../Space';
 import {Button} from '../Button';
 
 const InputMoneySection = styled.section`
   padding: 16px;
   font-size: 14px;
+`;
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 32px 0;
+`;
+
+const Button1 = styled(Button)`
+  grid-column: 2/3;
+  white-space: nowrap;
+`;
+
+const Button2 = styled(Button)`
+  grid-column: 4/5;
+  white-space: nowrap;
 `;
 
 type Props = {
@@ -71,9 +86,10 @@ function InputMoney(props: Props) {
       <Input inputName="金额" type="text" placeholder="在这里输入金额"
              value={initOutput === '' ? initOutput : output}
              onChange={onChange}/>
-      <Space height={48}/>
-      <Button onClick={submit}>保存</Button>
-      <Button onClick={reset}>重置</Button>
+      <Wrapper>
+        <Button1 onClick={submit}>保存</Button1>
+        <Button2 onClick={reset}>重置</Button2>
+      </Wrapper>
     </InputMoneySection>
   );
 }

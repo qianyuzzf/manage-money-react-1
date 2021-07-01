@@ -43,7 +43,6 @@ function Tally() {
 
   return (
     <MyLayout>
-      {JSON.stringify(newRecord)}
       <Types value={newRecord.type} className="type-wrapper1"
              onChange={(value) => onChange({type: value})}/>
       <Tags value={newRecord.tags}
