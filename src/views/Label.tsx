@@ -10,6 +10,8 @@ import {Space} from '../components/Space';
 const TagList = styled.ol`
   font-size: 16px;
   background: white;
+  max-height: 70vh;
+  overflow-y: auto;
 
   > li {
     border-bottom: 1px solid #d5d5d9;

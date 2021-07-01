@@ -9,6 +9,7 @@ const TagSections = styled.section`
   padding: 16px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 
   > ol {
     display: grid;

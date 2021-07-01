@@ -23,7 +23,7 @@ const NavWrapper = styled.nav`
         justify-content: center;
 
         &.selected {
-          color: red;
+          color: rgba(255, 204, 0, 1);
         }
 
         .icon {
