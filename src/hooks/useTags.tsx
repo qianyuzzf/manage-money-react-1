@@ -3,10 +3,21 @@ import {createId} from '../lib/createId';
 import {TagsType} from '../types/Types';
 
 const defTags = () => [
-  {id: createId(), name: '衣'},
-  {id: createId(), name: '食'},
-  {id: createId(), name: '住'},
-  {id: createId(), name: '行'}
+  {id: createId(), name: '餐饮'},
+  {id: createId(), name: '购物'},
+  {id: createId(), name: '日用'},
+  {id: createId(), name: '交通'},
+  {id: createId(), name: '运动'},
+  {id: createId(), name: '娱乐'},
+  {id: createId(), name: '旅行'},
+  {id: createId(), name: '通讯'},
+  {id: createId(), name: '服饰'},
+  {id: createId(), name: '美容'},
+  {id: createId(), name: '住房'},
+  {id: createId(), name: '孩子'},
+  {id: createId(), name: '长辈'},
+  {id: createId(), name: '医疗'},
+  {id: createId(), name: '书籍'}
 ];
 
 function useTags() {

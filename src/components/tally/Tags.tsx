@@ -68,6 +68,10 @@ type Props = {
   onChange: (value: TagsType[]) => void
 }
 
+type HashTags = {
+  [key: string]: string
+}
+
 function Tags(props: Props) {
   const {tags, addTag} = useTags();
   const selectedTags = props.value;
@@ -78,6 +82,24 @@ function Tags(props: Props) {
       props.onChange([...selectedTags, tag]);
     }
   };
+  // noinspection NonAsciiCharacters
+  const hashTags: HashTags = {
+    餐饮: 'diet',
+    购物: 'shopping',
+    日用: 'day_use',
+    交通: 'traffic',
+    运动: 'sport',
+    娱乐: 'disport',
+    旅行: 'travel',
+    通讯: 'correspondence',
+    服饰: 'clothes',
+    美容: 'cosmetology',
+    住房: 'house',
+    孩子: 'children',
+    长辈: 'eldership',
+    医疗: 'medical',
+    书籍: 'book'
+  };
   return (
     <TagSections>
       <ol>
@@ -87,7 +109,7 @@ function Tags(props: Props) {
                 className={selectedTags.map(item => item.id).indexOf(tag.id) >= 0 ? 'selected' : ''}
                 onClick={() => toggle(tag)}>
               <div>
-                <Icon name="diet"/>
+                <Icon name={hashTags[tag.name] ? hashTags[tag.name] : 'custom'}/>
               </div>
               <span>{tag.name}</span>
             </li>
@@ -95,7 +117,7 @@ function Tags(props: Props) {
         })}
         <li onClick={addTag}>
           <div>
-            <Icon name="custom"/>
+            <Icon name="add"/>
           </div>
           <span>新增标签</span>
         </li>
