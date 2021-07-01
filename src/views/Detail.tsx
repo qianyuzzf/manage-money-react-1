@@ -10,10 +10,8 @@ const Items = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
-  font-size: 18px;
-  line-height: 20px;
-  padding: 10px 16px;
+  font-size: 14px;
+  padding: 8px 16px;
 
   > .notes {
     margin-right: auto;
@@ -23,9 +21,11 @@ const Items = styled.div`
 `;
 
 const Header = styled.h3`
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 16px;
   padding: 10px 16px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
 `;
 
 function Detail() {
@@ -58,12 +58,13 @@ function Detail() {
   return (
     <Layout>
       <Types value={type}
-             className="type-wrapper2"
+             className="type-wrapper1"
              onChange={(value) => setType(value)}/>
       {array.map(item => (
         <div key={item[0]}>
           <Header>
-            {changeTime(item[0])}
+            <span>{changeTime(item[0])}</span>
+            <span>￥{JSON.stringify(item[1].reduce((acc, cur) => acc + parseFloat(cur.amount), 0))}</span>
           </Header>
           {item[1].map(item => (
             <Items key={item.createAt}>
