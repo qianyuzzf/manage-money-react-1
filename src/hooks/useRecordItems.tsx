@@ -11,7 +11,7 @@ function useRecordItems() {
     window.localStorage.setItem('recordItems', JSON.stringify(recordItems));
   }, [recordItems]);
   const addRecord = (record: RecordItems) => {
-    const bool = window.confirm('确定保存吗');
+    const bool = window.confirm('你确定要保存吗');
     if (bool) {
       if (record.tags.length === 0) {
         window.alert('请至少选择一个标签名');

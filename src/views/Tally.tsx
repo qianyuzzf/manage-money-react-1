@@ -18,7 +18,7 @@ const initRecord: RecordItems = {
   tags: [],
   notes: '',
   type: '-',
-  amount: 0,
+  amount: '',
   time: dayjs().format('YYYY-MM-DD')
 };
 
@@ -31,12 +31,16 @@ function Tally() {
       ...object
     });
   };
+  const resetRecord = () => {
+    setNewRecord(initRecord);
+  };
   const submit = () => {
     const submitResult = addRecord(newRecord);
     if (submitResult) {
-      setNewRecord(initRecord);
+      resetRecord();
     }
   };
+
   return (
     <MyLayout>
       {JSON.stringify(newRecord)}
@@ -48,7 +52,8 @@ function Tally() {
              onChange={(value) => onChange(value)}/>
       <InputMoney value={newRecord.amount}
                   onChange={(value) => onChange({amount: value})}
-                  onOk={submit}/>
+                  onOk={submit}
+                  resetRecord={resetRecord}/>
     </MyLayout>
   );
 }
