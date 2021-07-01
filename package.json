@@ -30,6 +30,7 @@
     "dayjs": "^1.10.5",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
+    "echarts": "^5.1.2",
     "eslint": "^7.11.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.2.0",
@@ -164,6 +165,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.3.1",
+    "@types/echarts": "^4.9.8",
     "@types/webpack-env": "^1.16.0",
     "svg-sprite-loader": "^6.0.7",
     "svgo-loader": "^3.0.0"

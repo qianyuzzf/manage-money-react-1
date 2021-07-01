@@ -1,85 +1,66 @@
 import Layout from '../components/Layout';
-import {Types} from '../components/tally/Types';
-import {useState} from 'react';
-import {useRecordItems} from '../hooks/useRecordItems';
-import dayjs from 'dayjs';
+import {useEffect} from 'react';
+import * as echarts from 'echarts';
 import styled from 'styled-components';
-import {RecordItems} from '../types/Types';
+import {NavBar} from '../components/NavBar';
 
-const Items = styled.div`
+const Wrapper = styled.div`
+  padding: 20px 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  font-size: 18px;
-  line-height: 20px;
-  padding: 10px 16px;
-
-  > .notes {
-    margin-right: auto;
-    margin-left: 16px;
-    color: #999;
-  }
-`;
-
-const Header = styled.h3`
-  font-size: 18px;
-  line-height: 20px;
-  padding: 10px 16px;
+  justify-content: center;
 `;
 
 function Statistics() {
-  const [type, setType] = useState<'-' | '+'>('-');
-  const {recordItems} = useRecordItems();
-  const selectedType = recordItems.filter(item => item.type === type);
-  const hash: { [key: string]: RecordItems[] } = {};
-  selectedType.forEach(item => {
-    const key = item.time;
-    if (key) {
-      if (!(key in hash)) {
-        hash[key] = [];
-      }
-      hash[key].unshift(item);
-    }
-  });
-  const array = Object.entries(hash).sort((a, b) => {
-    return a[0] < b[0] ? 1 : a[0] === b[0] ? 0 : -1;
-  });
-  const changeTime = (time: string) => {
-    const today = dayjs();
-    if (today.format('YYYY-MM-DD') === time) {
-      return '今天';
-    } else if (today.subtract(1, 'day').format('YYYY-MM-DD') === time) {
-      return '昨天';
-    } else {
-      return time.replace('-', '年').replace('-', '月') + '日';
-    }
-  };
+  useEffect(() => {
+    const root = document.querySelector('#root') as HTMLDivElement;
+    const main = document.querySelector('.main') as HTMLDivElement;
+    const width = root.clientWidth;
+    main.style.width = `${width * 0.8}px`;
+    main.style.height = `${width * 0.8}px`;
+    const myChart = echarts.init(main);
+    myChart.setOption({
+      title: {
+        text: '某站点用户访问来源',
+        subtext: '纯属虚构',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left'
+      },
+      series: [
+        {
+          name: '访问来源',
+          type: 'pie',
+          radius: '50%',
+          data: [
+            {value: 1048, name: '搜索引擎'},
+            {value: 735, name: '直接访问'},
+            {value: 580, name: '邮件营销'},
+            {value: 484, name: '联盟广告'},
+            {value: 300, name: '视频广告'}
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    });
+  }, []);
+
   return (
     <Layout>
-      <Types value={type}
-             className="type-wrapper2"
-             onChange={(value) => setType(value)}/>
-      {array.map(item => (
-        <div key={item[0]}>
-          <Header>
-            {changeTime(item[0])}
-          </Header>
-          {item[1].map(item => (
-            <Items key={item.createAt}>
-              <span className="tags">
-                {item.tags.map(item => item.name).join('，')}
-              </span>
-              <span className="notes">
-                {item.notes}
-              </span>
-              <span className="amount">
-                ￥{item.amount}
-              </span>
-            </Items>
-          ))}
-        </div>
-      ))}
+      <NavBar typeName="统计"/>
+      <Wrapper>
+        <div className="main"/>
+      </Wrapper>
     </Layout>
   );
 }
