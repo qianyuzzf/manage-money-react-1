@@ -7,6 +7,20 @@ import {Button} from '../components/Button';
 import {Center} from '../components/Center';
 import {Space} from '../components/Space';
 
+const Nav = styled.nav`
+  padding: 12px 16px;
+  font-size: 18px;
+  background: rgba(255, 218, 69, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > svg {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
 const TagList = styled.ol`
   font-size: 16px;
   background: white;
@@ -31,6 +45,11 @@ function Label() {
   const {tags, addTag} = useTags();
   return (
     <Layout>
+      <Nav>
+        <Icon name="head_sculpture"/>
+        <span>全部标签</span>
+        <Icon/>
+      </Nav>
       <TagList>
         {tags.map(item => (
           <li key={item.id}>
@@ -42,7 +61,7 @@ function Label() {
         ))}
       </TagList>
       <Center>
-        <Space height={48}/>
+        <Space height={32}/>
         <Button onClick={addTag}>新增标签</Button>
       </Center>
     </Layout>

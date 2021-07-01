@@ -17,6 +17,11 @@ const NavBar = styled.nav`
   line-height: 20px;
   padding: 14px 16px;
   background: #fff;
+
+  > svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const InputWrapper = styled.div`
