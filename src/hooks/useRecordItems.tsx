@@ -16,7 +16,10 @@ function useRecordItems() {
       if (record.tags.length === 0) {
         window.alert('请至少选择一个标签名');
         return false;
-      } else if (record.amount <= 0) {
+      } else if (record.amount === '') {
+        window.alert('金额不能为空');
+        return false;
+      } else if (parseFloat(record.amount) <= 0) {
         window.alert('金额不能小于或等于零');
         return false;
       } else {
