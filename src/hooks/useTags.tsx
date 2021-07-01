@@ -1,7 +1,6 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {createId} from '../lib/createId';
 import {TagsType} from '../types/Types';
-import {useUpdate} from './useUpdate';
 
 const defTags = () => [
   {id: createId(), name: '衣'},
@@ -13,15 +12,25 @@ const defTags = () => [
 function useTags() {
   const localTags: TagsType[] = JSON.parse(window.localStorage.getItem('tags') || '[]');
   const [tags, setTags] = useState<TagsType[]>(localTags.length === 0 ? defTags() : localTags);
-  useUpdate(() => {
+  useEffect(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags));
   }, [tags]);
   const addTag = () => {
     const tag = window.prompt('请问新添加的标签名是什么');
     if (tag !== null) {
       if (tag) {
-        setTags([...tags, {id: createId(), name: tag}]);
-        window.alert('标签名添加成功');
+        const tagsName = tags.map(item => item.name);
+        let bool = false;
+        for (let i = 0; i < tagsName.length; i++) {
+          if (tagsName[i] === tag) {
+            bool = true;
+            return window.alert('标签名不能重复');
+          }
+        }
+        if (!bool) {
+          setTags([...tags, {id: createId(), name: tag}]);
+          window.alert('标签名添加成功');
+        }
       } else {
         window.alert('标签名不能为空');
       }
