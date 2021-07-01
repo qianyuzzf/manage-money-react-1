@@ -6,6 +6,7 @@ const TypeSections = styled.section`
 
   > ul {
     display: flex;
+    height: 48px;
 
     &.type-wrapper1 {
       background: rgba(255, 218, 69, 1);
@@ -18,7 +19,7 @@ const TypeSections = styled.section`
     > li {
       width: 16.6667%;
       text-align: center;
-      padding: 12px 0;
+      padding: 13px 0;
       position: relative;
 
       &.selected::after {
