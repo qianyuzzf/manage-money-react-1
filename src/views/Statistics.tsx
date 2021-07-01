@@ -1,8 +1,9 @@
 import Layout from '../components/Layout';
-import {useEffect} from 'react';
 import * as echarts from 'echarts';
 import styled from 'styled-components';
 import {NavBar} from '../components/NavBar';
+import {useRecordItems} from '../hooks/useRecordItems';
+import {useUpdate} from '../hooks/useUpdate';
 
 const Wrapper = styled.div`
   padding: 20px 0;
@@ -11,38 +12,46 @@ const Wrapper = styled.div`
 `;
 
 function Statistics() {
-  useEffect(() => {
+  const {recordItems} = useRecordItems();
+  const hash: { value: number, name: string }[] = [];
+  recordItems.forEach(item => {
+    const key = item.tags[0].name;
+    if (key) {
+      for (let i = 0; i < hash.length; i++) {
+        if (key === hash[i].name) {
+          hash[i].value += parseFloat(item.amount);
+          return;
+        }
+      }
+      hash.push({value: parseFloat(item.amount), name: key});
+    }
+  });
+  useUpdate(() => {
     const root = document.querySelector('#root') as HTMLDivElement;
     const main = document.querySelector('.main') as HTMLDivElement;
     const width = root.clientWidth;
     main.style.width = `${width * 0.8}px`;
-    main.style.height = `${width * 0.8}px`;
+    main.style.height = `${width}px`;
     const myChart = echarts.init(main);
     myChart.setOption({
       title: {
-        text: '某站点用户访问来源',
-        subtext: '纯属虚构',
+        text: '收支统计',
+        subtext: '每种类型的花销及收入统计',
         left: 'center'
       },
       tooltip: {
         trigger: 'item'
       },
       legend: {
-        orient: 'vertical',
-        left: 'left'
+        left: 'left',
+        bottom: 'bottom'
       },
       series: [
         {
-          name: '访问来源',
+          name: '收支',
           type: 'pie',
           radius: '50%',
-          data: [
-            {value: 1048, name: '搜索引擎'},
-            {value: 735, name: '直接访问'},
-            {value: 580, name: '邮件营销'},
-            {value: 484, name: '联盟广告'},
-            {value: 300, name: '视频广告'}
-          ],
+          data: hash,
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
@@ -53,7 +62,7 @@ function Statistics() {
         }
       ]
     });
-  }, []);
+  }, [hash]);
 
   return (
     <Layout>

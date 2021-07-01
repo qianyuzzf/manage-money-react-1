@@ -80,7 +80,7 @@ function Tags(props: Props) {
     if (selectedTags.indexOf(tag) >= 0) {
       props.onChange(selectedTags.filter(t => t !== tag));
     } else {
-      props.onChange([...selectedTags, tag]);
+      props.onChange([tag]);
     }
   };
   // noinspection NonAsciiCharacters
