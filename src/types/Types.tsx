@@ -1,4 +1,4 @@
-type TagsType = { id: number, name: string }
+type TagsType = { id: number, type: string, name: string }
 
 type RecordItems = {
   tags: TagsType[]

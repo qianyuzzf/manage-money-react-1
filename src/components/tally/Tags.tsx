@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {useTags} from '../../hooks/useTags';
-import {TagsType} from '../../types/Types';
+import {RecordItems, TagsType} from '../../types/Types';
 import Icon from '../Icon';
 
 const TagSections = styled.section`
@@ -65,7 +65,7 @@ const TagSections = styled.section`
   }
 `;
 type Props = {
-  value: TagsType[];
+  value: RecordItems;
   onChange: (value: TagsType[]) => void
 }
 
@@ -75,10 +75,11 @@ type HashTags = {
 
 function Tags(props: Props) {
   const {tags, addTag} = useTags();
+  console.log(tags);
   const selectedTags = props.value;
   const toggle = (tag: TagsType) => {
-    if (selectedTags.indexOf(tag) >= 0) {
-      props.onChange(selectedTags.filter(t => t !== tag));
+    if (selectedTags.tags.indexOf(tag) >= 0) {
+      props.onChange(selectedTags.tags.filter(t => t !== tag));
     } else {
       props.onChange([tag]);
     }
@@ -99,24 +100,33 @@ function Tags(props: Props) {
     孩子: 'children',
     长辈: 'eldership',
     医疗: 'medical',
-    书籍: 'book'
+    书籍: 'book',
+    工资: 'salary',
+    兼职: 'concurrent_post',
+    理财: 'manage_money',
+    礼金: 'cash_gift',
+    其他: 'make_money'
   };
   return (
     <TagSections>
       <ol>
         {tags.map(tag => {
-          return (
-            <li key={tag.id}
-                className={selectedTags.map(item => item.id).indexOf(tag.id) >= 0 ? 'selected' : ''}
-                onClick={() => toggle(tag)}>
-              <div>
-                <Icon name={hashTags[tag.name] ? hashTags[tag.name] : 'custom'}/>
-              </div>
-              <span>{tag.name}</span>
-            </li>
-          );
-        })}
-        <li onClick={addTag}>
+            if (tag.type === selectedTags.type) {
+              return (
+                <li key={tag.id}
+                    className={selectedTags.tags.map(item => item.id).indexOf(tag.id) >= 0 ? 'selected' : ''}
+                    onClick={() => toggle(tag)}>
+                  <div>
+                    <Icon name={hashTags[tag.name] ? hashTags[tag.name] : 'custom'}/>
+                  </div>
+                  <span>{tag.name}</span>
+                </li>
+              );
+            }
+            return undefined;
+          }
+        )}
+        <li onClick={() => addTag(selectedTags.type)}>
           <div>
             <Icon name="add"/>
           </div>

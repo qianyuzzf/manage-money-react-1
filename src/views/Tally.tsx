@@ -45,7 +45,7 @@ function Tally() {
     <MyLayout>
       <Types value={newRecord.type} className="type-wrapper1"
              onChange={(value) => onChange({type: value})}/>
-      <Tags value={newRecord.tags}
+      <Tags value={newRecord}
             onChange={(value) => onChange({tags: value})}/>
       <Notes value={{notes: newRecord.notes, time: newRecord.time}}
              onChange={(value) => onChange(value)}/>

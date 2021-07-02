@@ -30,6 +30,18 @@ const TagList = styled.ol`
 
 function Label() {
   const {tags, addTag} = useTags();
+  const tagType = () => {
+    const type = window.prompt('请问添加标签类型为收入还是支出');
+    if (type === '收入') {
+      addTag('+');
+    } else if (type === '支出') {
+      addTag('-');
+    } else if (type === null) {
+      return;
+    } else {
+      window.alert('请填写正确类型');
+    }
+  };
   return (
     <Layout>
       <NavBar typeName="全部标签"/>
@@ -45,7 +57,7 @@ function Label() {
       </TagList>
       <Center>
         <Space height={32}/>
-        <Button onClick={addTag}>新增标签</Button>
+        <Button onClick={tagType}>新增标签</Button>
       </Center>
     </Layout>
   );

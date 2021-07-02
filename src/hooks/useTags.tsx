@@ -3,21 +3,26 @@ import {createId} from '../lib/createId';
 import {TagsType} from '../types/Types';
 
 const defTags = () => [
-  {id: createId(), name: '餐饮'},
-  {id: createId(), name: '购物'},
-  {id: createId(), name: '日用'},
-  {id: createId(), name: '交通'},
-  {id: createId(), name: '运动'},
-  {id: createId(), name: '娱乐'},
-  {id: createId(), name: '旅行'},
-  {id: createId(), name: '通讯'},
-  {id: createId(), name: '服饰'},
-  {id: createId(), name: '美容'},
-  {id: createId(), name: '住房'},
-  {id: createId(), name: '孩子'},
-  {id: createId(), name: '长辈'},
-  {id: createId(), name: '医疗'},
-  {id: createId(), name: '书籍'}
+  {id: createId(), type: '-', name: '餐饮'},
+  {id: createId(), type: '-', name: '购物'},
+  {id: createId(), type: '-', name: '日用'},
+  {id: createId(), type: '-', name: '交通'},
+  {id: createId(), type: '-', name: '运动'},
+  {id: createId(), type: '-', name: '娱乐'},
+  {id: createId(), type: '-', name: '旅行'},
+  {id: createId(), type: '-', name: '通讯'},
+  {id: createId(), type: '-', name: '服饰'},
+  {id: createId(), type: '-', name: '美容'},
+  {id: createId(), type: '-', name: '住房'},
+  {id: createId(), type: '-', name: '孩子'},
+  {id: createId(), type: '-', name: '长辈'},
+  {id: createId(), type: '-', name: '医疗'},
+  {id: createId(), type: '-', name: '书籍'},
+  {id: createId(), type: '+', name: '工资'},
+  {id: createId(), type: '+', name: '兼职'},
+  {id: createId(), type: '+', name: '理财'},
+  {id: createId(), type: '+', name: '礼金'},
+  {id: createId(), type: '+', name: '其他'}
 ];
 
 function useTags() {
@@ -26,7 +31,7 @@ function useTags() {
   useEffect(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags));
   }, [tags]);
-  const addTag = () => {
+  const addTag = (type: string) => {
     const tag = window.prompt('请问新添加的标签名是什么');
     if (tag !== null) {
       if (tag) {
@@ -39,7 +44,7 @@ function useTags() {
           }
         }
         if (!bool) {
-          setTags([...tags, {id: createId(), name: tag}]);
+          setTags([...tags, {id: createId(), type, name: tag}]);
           window.alert('标签名添加成功');
         }
       } else {
@@ -54,7 +59,7 @@ function useTags() {
     }
   };
   const updateTag = (id: number, name: string) => {
-    setTags(tags.map(item => item.id === id ? {id, name} : item));
+    setTags(tags.map(item => item.id === id ? {...item, name} : item));
   };
   const findTag = (id: number) => tags.filter(item => item.id === id)[0];
   const findTagIndex = (id: number) => {
