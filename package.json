@@ -1,6 +1,7 @@
 {
   "name": "manage-money-react-1",
   "version": "0.1.0",
+  "homepage": "https://github.com/manage-money-react-1-website/",
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
