@@ -11,6 +11,12 @@ import {Tag} from './views/Tag';
 
 const AppWrapper = styled.div`
   color: #333;
+  @media (min-width: 500px) {
+    width: 500px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 function App() {
