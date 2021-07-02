@@ -4,11 +4,25 @@ import styled from 'styled-components';
 import {NavBar} from '../components/NavBar';
 import {useRecordItems} from '../hooks/useRecordItems';
 import {useUpdate} from '../hooks/useUpdate';
+import Icon from '../components/Icon';
 
 const Wrapper = styled.div`
   padding: 20px 0;
   display: flex;
   justify-content: center;
+  position: relative;
+
+  > span {
+    position: absolute;
+
+    > svg {
+      margin-top: 100px;
+      width: 100%;
+      height: 100%;
+      color: #999;
+    }
+  }
+
 `;
 
 function Statistics() {
@@ -26,6 +40,7 @@ function Statistics() {
       hash.push({value: parseFloat(item.amount), name: key});
     }
   });
+  console.log(recordItems);
   useUpdate(() => {
     const root = document.querySelector('#root') as HTMLDivElement;
     const main = document.querySelector('.main') as HTMLDivElement;
@@ -68,6 +83,11 @@ function Statistics() {
     <Layout>
       <NavBar typeName="统计"/>
       <Wrapper>
+        {recordItems.length === 0 ?
+          <span>
+            <Icon name="no_money"/>
+          </span> :
+          undefined}
         <div className="main"/>
       </Wrapper>
     </Layout>

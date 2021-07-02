@@ -5,6 +5,7 @@ import {useRecordItems} from '../hooks/useRecordItems';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import {RecordItems} from '../types/Types';
+import Icon from '../components/Icon';
 
 const Items = styled.div`
   display: flex;
@@ -26,6 +27,22 @@ const Header = styled.h3`
   background: white;
   display: flex;
   justify-content: space-between;
+`;
+
+const Img = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > span {
+    padding: 24px 16px;
+  }
+
+  > svg {
+    margin-top: 80px;
+    width: 100%;
+    height: 100%;
+    color: #999;
+  }
 `;
 
 function Detail() {
@@ -55,32 +72,38 @@ function Detail() {
       return time.replace('-', '年').replace('-', '月') + '日';
     }
   };
+  console.log(array);
   return (
     <Layout>
       <Types value={type}
              className="type-wrapper1"
              onChange={(value) => setType(value)}/>
-      {array.map(item => (
-        <div key={item[0]}>
-          <Header>
-            <span>{changeTime(item[0])}</span>
-            <span>￥{JSON.stringify(item[1].reduce((acc, cur) => acc + parseFloat(cur.amount), 0))}</span>
-          </Header>
-          {item[1].map(item => (
-            <Items key={item.createAt}>
+      {array.length === 0 ?
+        <Img>
+          <span>亲，暂时还没有数据哦 ...</span>
+          <Icon name="no_money"/>
+        </Img> :
+        array.map(item => (
+          <div key={item[0]}>
+            <Header>
+              <span>{changeTime(item[0])}</span>
+              <span>￥{JSON.stringify(item[1].reduce((acc, cur) => acc + parseFloat(cur.amount), 0))}</span>
+            </Header>
+            {item[1].map(item => (
+              <Items key={item.createAt}>
               <span className="tags">
                 {item.tags.map(item => item.name).join('，')}
               </span>
-              <span className="notes">
+                <span className="notes">
                 {item.notes}
               </span>
-              <span className="amount">
+                <span className="amount">
                 ￥{item.amount}
               </span>
-            </Items>
-          ))}
-        </div>
-      ))}
+              </Items>
+            ))}
+          </div>
+        ))}
     </Layout>
   );
 }
