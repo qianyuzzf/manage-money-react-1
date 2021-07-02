@@ -75,7 +75,6 @@ type HashTags = {
 
 function Tags(props: Props) {
   const {tags, addTag} = useTags();
-  console.log(tags);
   const selectedTags = props.value;
   const toggle = (tag: TagsType) => {
     if (selectedTags.tags.indexOf(tag) >= 0) {

@@ -22,7 +22,6 @@ const Wrapper = styled.div`
       color: #999;
     }
   }
-
 `;
 
 function Statistics() {
@@ -40,7 +39,6 @@ function Statistics() {
       hash.push({value: parseFloat(item.amount), name: key});
     }
   });
-  console.log(recordItems);
   useUpdate(() => {
     const root = document.querySelector('#root') as HTMLDivElement;
     const main = document.querySelector('.main') as HTMLDivElement;

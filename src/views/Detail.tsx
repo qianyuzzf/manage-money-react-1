@@ -11,8 +11,10 @@ const Items = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   padding: 8px 16px;
+  background: white;
+  border-bottom: 1px solid #ddd;
 
   > .notes {
     margin-right: auto;
@@ -22,9 +24,8 @@ const Items = styled.div`
 `;
 
 const Header = styled.h3`
-  font-size: 16px;
+  font-size: 18px;
   padding: 10px 16px;
-  background: white;
   display: flex;
   justify-content: space-between;
 `;
@@ -56,7 +57,7 @@ function Detail() {
       if (!(key in hash)) {
         hash[key] = [];
       }
-      hash[key].unshift(item);
+      hash[key].push(item);
     }
   });
   const array = Object.entries(hash).sort((a, b) => {
@@ -72,7 +73,6 @@ function Detail() {
       return time.replace('-', '年').replace('-', '月') + '日';
     }
   };
-  console.log(array);
   return (
     <Layout>
       <Types value={type}
