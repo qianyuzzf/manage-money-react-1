@@ -11,10 +11,11 @@ const Label = styled.label`
   }
 
   > input {
-    display: block;
     width: 100%;
     background: none;
     border: none;
+    display: flex;
+    align-items: center;
   }
 `;
 
