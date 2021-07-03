@@ -42,7 +42,7 @@ function Statistics() {
   useUpdate(() => {
     const root = document.querySelector('#root') as HTMLDivElement;
     const main = document.querySelector('.main') as HTMLDivElement;
-    const width = root.clientWidth;
+    const width = root.clientWidth > 500 ? 500 : root.clientWidth;
     main.style.width = `${width * 0.8}px`;
     main.style.height = `${width}px`;
     const myChart = echarts.init(main);

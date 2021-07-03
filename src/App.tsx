@@ -12,7 +12,7 @@ import qrCode from './assets/images/qr.png';
 
 const AppWrapper = styled.div`
   color: #333;
-  @media (min-width: 500px) {
+  @media (min-width: 501px) {
     width: 500px;
     position: relative;
     left: 50%;
@@ -22,7 +22,7 @@ const AppWrapper = styled.div`
 
 const ImgWrapper = styled.div`
   display: none;
-  @media (min-width: 500px) {
+  @media (min-width: 501px) {
     display: block;
     background: rgba(0, 0, 0, 0.5);
     position: absolute;
